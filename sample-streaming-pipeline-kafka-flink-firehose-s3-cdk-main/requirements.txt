@@ -1,0 +1,7 @@
+aws-cdk-lib==2.190.0
+constructs>=10.0.0,<11.0.0
+aws-cdk.aws-lambda-python-alpha
+aws-cdk.aws-kinesisanalytics-flink-alpha
+cdk-nag
+kafka-python
+aws-msk-iam-sasl-signer-python

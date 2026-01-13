@@ -1,0 +1,23 @@
+{
+  "comment": "Development environment configuration - for local testing and dev AWS account",
+  "environment": "dev",
+  "aws": {
+    "region": "us-east-1",
+    "account_id": "YOUR_DEV_ACCOUNT_ID"
+  },
+  "bastion_host": {
+    "instance_type": "t3.micro",
+    "enabled": true
+  },
+  "stream_processor": {
+    "parallelism": 2,
+    "memory_per_taskmanager_mb": 1024
+  },
+  "data_lake": {
+    "enable_intelligent_tiering": true
+  },
+  "observability": {
+    "log_level": "DEBUG",
+    "cloudwatch_log_retention_days": 7
+  }
+}

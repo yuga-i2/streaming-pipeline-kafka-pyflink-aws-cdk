@@ -1,0 +1,169 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+
+# AWS CDK
+cdk.out/
+cdk.assets.json
+*.zip
+node_modules/
+package-lock.json
+
+# AWS
+.aws/
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+aws_credentials.txt
+.awscli
+.aws-credentials
+
+# Logs
+*.log
+logs/
+*.log.*
+CloudTrail/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+environment.sh
+.envrc
+
+# OS
+.DS_Store
+Thumbs.db
+.directory
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+*.rej
+*~
+
+# Build artifacts
+target/
+*.class
+*.jar
+*.war
+.gradle
+*.gradle
+out/
+*.iml
+
+# JetBrains
+.idea/
+*.iws
+*.iml
+*.ipr
+*.iml
+.gradle
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+pom-xml.bak
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.hypothesis/
+
+# Local development
+local-dev/
+docker-compose.local.yml
+.localrc
+debug.log
+
+# Credentials & secrets
+*.pem
+*.key
+*.crt
+secrets/
+.secrets
+private/
+credentials.json
+
+# Generated files
+*.generated.*
+generated/
+.generated/
+
+# Terraform (if used later)
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# Data files (if any)
+data/
+*.csv
+*.xlsx
+*.parquet
+*.avro
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+docker/build/
+
+# Misc
+*.orig
+.cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/

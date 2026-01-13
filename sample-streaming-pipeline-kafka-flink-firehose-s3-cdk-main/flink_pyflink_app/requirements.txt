@@ -1,0 +1,21 @@
+# PyFlink requirements for order processing pipeline
+# Install: pip install -r requirements.txt
+
+# PyFlink: Streaming data processing
+apache-flink==1.20.0
+apache-flink-python==1.20.0
+
+# JSON serialization/deserialization
+python-json-logger==2.0.7
+
+# AWS SDK (for loading config from CloudWatch Parameter Store in production)
+boto3>=1.28.0
+
+# Decimal arithmetic (already in Python stdlib, but pin for clarity)
+# decimal (built-in)
+
+# Development dependencies (optional)
+pytest>=7.0.0  # Unit testing
+pytest-cov>=4.0.0  # Code coverage
+black>=23.0.0  # Code formatting
+mypy>=1.0.0  # Static type checking

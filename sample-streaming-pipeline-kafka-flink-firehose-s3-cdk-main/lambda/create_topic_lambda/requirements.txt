@@ -1,0 +1,4 @@
+# Dependencies are provided by the kafka_layer
+# kafka-python
+# aws-msk-iam-sasl-signer-python
+# boto3 (provided by AWS Lambda runtime)

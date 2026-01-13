@@ -1,0 +1,98 @@
+{
+  "project": {
+    "name": "ecommerce-order-streaming",
+    "environment": "dev",
+    "description": "Real-time e-commerce order processing pipeline"
+  },
+  "stacks": {
+    "event_streaming_stack_name": "EcommerceEventStreamingStack",
+    "order_processing_stack_name": "OrderProcessingFlinkStack",
+    "data_lake_stack_name": "OrderDataLakeStack",
+    "ml_features_stack_name": "OrderMLFeaturesStack"
+  },
+  "vpc": {
+    "cidr_range": "10.0.0.0/16",
+    "cidr_mask": 24,
+    "description": "E-commerce order processing VPC",
+    "enable_flow_logs": true
+  },
+  "bastion_host": {
+    "instance_type": "t3.micro",
+    "enabled": true,
+    "description": "Kafka admin and debugging access"
+  },
+  "event_streaming": {
+    "cluster_id": "ecommerce-kafka-cluster",
+    "cluster_name": "ecommerce-kafka-cluster",
+    "cluster_description": "MSK Serverless cluster for order events",
+    "topics": {
+      "orders_raw": {
+        "name": "ecommerce.orders.raw",
+        "description": "Raw order events from checkout system",
+        "partitions": 10,
+        "replication_factor": 2
+      },
+      "orders_processed": {
+        "name": "ecommerce.orders.processed",
+        "description": "Processed and enriched order events",
+        "partitions": 10,
+        "replication_factor": 2
+      },
+      "orders_dlq": {
+        "name": "ecommerce.orders.dlq",
+        "description": "Dead letter queue for failed order processing",
+        "partitions": 3,
+        "replication_factor": 2
+      }
+    }
+  },
+  "stream_processor": {
+    "application_name": "ecommerce-order-processor",
+    "application_description": "PyFlink job for order validation, enrichment, deduplication, and windowed aggregation",
+    "artifact_bucket_name": "ecommerce-flink-artifacts-${ACCOUNT_ID}",
+    "python_script_path": "flink_pyflink_app/order_processor.py",
+    "python_requirements_file": "flink_pyflink_app/requirements.txt",
+    "parallelism": 4,
+    "checkpoint_interval_ms": 60000,
+    "watermark_allowed_lateness_ms": 600000
+  },
+  "data_lake": {
+    "bucket_prefix": "ecommerce-orders-lake",
+    "bucket_description": "S3 data lake for order analytics",
+    "buffering_hints": {
+      "intervalInSeconds": 300,
+      "sizeInMBs": 128
+    },
+    "s3_prefix": "orders/year=${YEAR}/month=${MONTH}/day=${DAY}/hour=${HOUR}/",
+    "data_format": "parquet",
+    "compression": "gzip",
+    "lifecycle_days_to_glacier": 90,
+    "lifecycle_days_to_deep_archive": 365
+  },
+  "ml_features": {
+    "feature_group_name": "ecommerce-order-features",
+    "feature_group_description": "Real-time order features for ML models",
+    "event_time_feature": "order_timestamp",
+    "record_identifier_feature": "order_id",
+    "lambda": {
+      "function_event_source_batch_size": 25,
+      "consumer_group_id": "ecommerce-ml-features-consumer",
+      "timeout_seconds": 120,
+      "memory_mb": 512
+    }
+  },
+  "observability": {
+    "log_level": "INFO",
+    "enable_structured_logging": true,
+    "cloudwatch_log_retention_days": 30,
+    "enable_xray_tracing": true,
+    "custom_metrics_namespace": "EcommerceOrderProcessing"
+  },
+  "tags": {
+    "Environment": "dev",
+    "Project": "ecommerce-order-streaming",
+    "CostCenter": "data-engineering",
+    "Owner": "data-platform-team",
+    "Application": "order-processing"
+  }
+}

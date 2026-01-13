@@ -1,0 +1,40 @@
+{
+  "comment": "Production environment configuration - highly available, monitored, cost-optimized",
+  "environment": "prod",
+  "aws": {
+    "region": "us-east-1",
+    "account_id": "YOUR_PROD_ACCOUNT_ID"
+  },
+  "bastion_host": {
+    "instance_type": "t3.micro",
+    "enabled": false
+  },
+  "stream_processor": {
+    "parallelism": 16,
+    "memory_per_taskmanager_mb": 4096,
+    "auto_scaling": {
+      "enabled": true,
+      "min_parallelism": 8,
+      "max_parallelism": 32,
+      "target_cpu_utilization": 70
+    }
+  },
+  "data_lake": {
+    "enable_intelligent_tiering": true,
+    "enable_versioning": true,
+    "enable_cross_region_replication": true
+  },
+  "msk": {
+    "enable_multi_az": true
+  },
+  "observability": {
+    "log_level": "INFO",
+    "cloudwatch_log_retention_days": 90,
+    "enable_xray_tracing": true,
+    "alarm_sns_topic_arn": "arn:aws:sns:us-east-1:YOUR_PROD_ACCOUNT_ID:ecommerce-alerts"
+  },
+  "tags": {
+    "Environment": "prod",
+    "CriticalSystem": "true"
+  }
+}
